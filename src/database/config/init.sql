@@ -10,11 +10,13 @@ Create table Tweets (
 Create table Replyes (
     id serial primary key ,
     content text not null ,
+    avatar  text,  
     name varchar(100) Default 0,
     tweets_id int ,
     foreign key(tweets_id) REFERENCES Tweets(id)
 );
 
 INSERT INTO Tweets (user_name,avatar,content,likes) values ('tareq','https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg','Software Engineering',109) ,('salsabeel' ,'https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg' , 'Software Engineering' , 99);
+INSERT INTO Replyes (name,avatar,content,tweets_id ) values ('tareq','https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg','Software Engineering',1) ,('salsabeel' ,'https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg' , 'Software Engineering' ,2);
 
 commit;

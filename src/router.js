@@ -2,14 +2,17 @@ const express = require('express');
 
 const router = express.Router();
 
-// const  {} = require('./controller')
-const getData = require('./database/queries/getData');
+const { getTweets, getReplies } = require('./database/queries');
 
-router.get('/', (req, res) => {
-    console.log(getData , "123");
+router.get('/tweets', (req, res) => {
+  getTweets().then((data) => res.json(data.rows)).catch(() => res.json({
+    massege: 'Error to get tweets',
+    status: '500',
+  }));
 });
-
-// router.use(clientError);
-// router.use(serverError);
+router.get('/Reply', (req, res) => {
+  // req.body
+  getReplies(2).then((data) => res.json(data.rows)).catch(() => res.json({ massege: 'Error to get replies', status: '500' }));
+});
 
 module.exports = router;
