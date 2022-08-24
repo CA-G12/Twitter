@@ -21,16 +21,14 @@ switch (NODE_ENV) {
     throw new Error('No Database Found');
 }
 
-console.log(DB_URL)
-
 const connection = new Pool({
   connectionString: DB_URL,
   ssl:
-      NODE_ENV === 'production' ?
-        {
+      NODE_ENV === 'production'
+        ? {
           rejectUnauthorized: false,
-        } :
-        false,
+        }
+        : false,
 });
 
 module.exports = connection;
