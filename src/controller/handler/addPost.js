@@ -15,7 +15,6 @@ function createRandomUser() {
 }
 
 Array.from({ length: 1 }).forEach(() => {
-  console.log(createRandomUser());
   user.push(createRandomUser());
 });
 
@@ -23,13 +22,13 @@ const addPost = (req, res) => {
   const { data } = req.body;
   addTweet({
     user_name: user[0].username, avatar: user[0].avatar, content: data, likes: 0,
-  }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'ss', status: '500' }));
+  }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'Error to add Tweet', status: '500' }));
 };
 const addReplies = (req, res) => {
-  const { data } = req.body;
+  const { data ,tweet_id } = req.body; 
   addReply({
-    name: user[0].username, avatar: user[0].avatar, content: 's', tweets_id: 1,
-  }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'ss', status: '500' }));
+    name: user[0].username, avatar: user[0].avatar, content: data, tweets_id:tweet_id,
+  }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: err, status: '500' }));
 }
 
 module.exports = {addPost,addReplies};

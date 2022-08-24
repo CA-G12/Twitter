@@ -1,22 +1,16 @@
-const main = document.querySelector('main');
+const main = document.querySelector('.main');
+const tweetsSection = document.querySelector('.tweets--render');
 const textArea = document.getElementById('tweets');
 const submitBtn = document.getElementById('submit');
-const deleteBtn = document.getElementById('delete');
-
-fetchData('GET', undefined, '/Tweets')
-  .then((data) => renderTweet(data))
-  .catch((err) => console.log(err));
-  
-fetchData('GET', undefined, '/Reply')
-.then((data) => renderReplyes(data))
-.catch((err) => console.log(err));
-
+// fetchData('GET', undefined, '/Reply')
+//   .then((data) => renderReplyes(data))
+//   .catch((err) => console.log(err));
 
 const renderTweet = (data) => {
-  console.log(data);
-  data.forEach((ele) => {
-    const tweets = document.createElement('div');
-    tweets.setAttribute('class', 'tweets');
+  tweetsSection.textContent = '';
+  data.sort((ele1, ele2) => ele2.id - ele1.id).forEach((ele) => {
+    const tweet = document.createElement('div');
+    tweet.setAttribute('class', 'tweets');
 
     const headerTweets = document.createElement('div');
     headerTweets.setAttribute('class', 'headerTweets');
@@ -25,9 +19,9 @@ const renderTweet = (data) => {
     avatar.setAttribute('class', 'avatar');
     avatar.setAttribute('src', ele.avatar);
 
-    const user_name = document.createElement('p');
-    user_name.setAttribute('class', 'user_name');
-    user_name.textContent = ele.user_name;
+    const userName = document.createElement('p');
+    userName.setAttribute('class', 'user_name');
+    userName.textContent = ele.user_name;
 
     const text = document.createElement('p');
     text.setAttribute('class', 'text');
@@ -39,60 +33,116 @@ const renderTweet = (data) => {
 
     const reply = document.createElement('button');
     reply.setAttribute('class', 'btn');
-    reply.textContent = "Reply"
+    reply.textContent = 'Reply';
+    reply.addEventListener('click', () => {
+      replyTweet(ele.id);
+    });
 
-    tweets.appendChild(headerTweets);
-    headerTweets.appendChild(avatar);
-    headerTweets.appendChild(user_name);
-    tweets.appendChild(text);
-    tweets.appendChild(likes);
-    tweets.appendChild(reply);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('class', 'btn');
+    deleteBtn.textContent = 'delete';
 
-    main.appendChild(tweets);
+    deleteBtn.addEventListener('click', () => {
+      deleteTweet(ele.id);
+    });
+
+    headerTweets.appendChild(avatar, userName);
+    tweet.append(headerTweets, text, likes, reply, deleteBtn);
+    gen(tweetsSection, tweet);
   });
 };
 
-const renderReplyes = (data) => {
-  console.log(data);
-  data.forEach((ele) => {
-    const replies = document.createElement('div');
-    replies.setAttribute('class', 'replies');
+function gen(childFor, child) {
+  childFor.appendChild(child);
+}
 
-    const headerReplies = document.createElement('div');
-    headerReplies.setAttribute('class', 'headerReplies');
+// const popReply = (data ,tweet_id) => {
+//   // data.forEach((ele) => {
+//     // ele.user
 
-    const avatar = document.createElement('img');
-    avatar.setAttribute('class', 'avatar');
-    avatar.setAttribute('src', ele.avatar);
+//   // ele.content
+//   // const tweets_id = document.createElement('p');
+//   // text.setAttribute('class', 'tweets_id');
+//   // text.textContent = 'id twweet';
+//   // ele.tweets_id
 
-    const user_name = document.createElement('p');
-    user_name.setAttribute('class', 'user_name');
-    user_name.textContent = ele.content;
+//   headerReplies.append(avatar, user_name, closeBtn);
+//   addTweet.append(headerReplies, text, replySubmit);
+//   replies.append(addTweet);
+//   main.appendChild(replies);
+//   // });
+// };
 
-    const text = document.createElement('p');
-    text.setAttribute('class', 'text');
-    text.textContent = ele.content;
+function popReply(data, tweetId) {
+  const replies = document.createElement('div');
+  replies.style.display = 'block';
+  replies.setAttribute('class', 'popup');
 
-    const tweets_id = document.createElement('p');
-    text.setAttribute('class', 'tweets_id');
-    text.textContent = ele.tweets_id;
+  const addTweet = document.createElement('div');
+  addTweet.setAttribute('class', 'addTweet');
+  const headerReplies = document.createElement('div');
+  headerReplies.setAttribute('class', 'headerReplies');
 
-    replies.appendChild(headerReplies);
-    headerReplies.appendChild(avatar);
-    headerReplies.appendChild(user_name);
-    replies.appendChild(text);
-    replies.appendChild(tweets_id);
-    main.appendChild(replies);
+  const avatar = document.createElement('img');
+  avatar.setAttribute('class', 'avatar');
+  avatar.setAttribute('src', 'salsabeel .png');
+
+  const userName = document.createElement('p');
+  userName.setAttribute('class', 'user_name');
+  userName.textContent = 'user';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.setAttribute('class', 'closebtn');
+  closeBtn.textContent = 'X';
+
+  closeBtn.addEventListener('click', () => {
+    replies.style.display = 'none';
   });
-};
+
+  const text = document.createElement('textarea');
+  text.setAttribute('class', 'text');
+  text.setAttribute('name', 'addReply');
+
+  const replySubmit = document.createElement('button');
+  replySubmit.textContent = 'Reply';
+  replySubmit.addEventListener('click', () => {
+    addReply(text.value, tweetId);
+  });
+
+  headerReplies.append(avatar, userName, closeBtn);
+  addTweet.append(headerReplies, text, replySubmit);
+  replies.append(addTweet);
+  main.appendChild(replies);
+}
+
+fetchData('GET', undefined, '/Tweets')
+  .then((data) => renderTweet(data))
+  .catch((err) => console.log(err));
 
 submitBtn.addEventListener('click', () => {
   fetchData('POST', {
     data: textArea.value,
   }, '/addTweets').then((data) => {
-    window.location = '/';
+    fetchData('GET', undefined, '/Tweets')
+      .then((data) => renderTweet(data))
+      .catch((err) => console.log(err));
   }).catch((err) => { console.log(err); });
 });
-deleteBtn.addEventListener('click', () => {
-  // fetchData('DELETE',textArea.value, '/deleteTweet').then((data) =>console.log('done')).catch(err=>{console.log(err)})
-});
+
+function addReply(content, id) {
+  fetchData('POST', { data: content, tweet_id: id }, '/addReplay')
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+}
+function deleteTweet(id) {
+  fetchData('DELETE', { data: id }, '/deleteTweet')
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+
+  window.location.reload();
+}
+function replyTweet(tweet_id) {
+  fetchData('GET', undefined, '/Reply')
+    .then((data) => popReply(data, tweet_id))
+    .catch((err) => console.log(err));
+}

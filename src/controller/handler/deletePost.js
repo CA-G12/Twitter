@@ -1,8 +1,7 @@
 const { deletedTweet, deletedReply } = require('../../database/queries/deletedData');
 
 const deleteTweet = (req, res) => {
-  // req.body
-  deletedTweet(1).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'Error to delete', status: '500' }));
+  deletedTweet(req.body.data).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'Error to delete', status: '500' }));
 };
 const deleteReply = (req, res) => {
   // req.body
