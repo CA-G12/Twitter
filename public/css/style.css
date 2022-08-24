@@ -1,3 +1,10 @@
+body {
+    background: #111319;
+}
+h1 {
+    color: #fff;
+    margin: 30px 50px;
+}
 /* ------------------------- Start About Main ------------------------- */
 main {
     display: flex;
@@ -8,26 +15,67 @@ main {
 .textArea textarea {
     width: 509px;
     height: 180px;
+    padding: 15px;
+    border-radius: 10px;
 }
-.buttons .btn {
+.btn {
     padding: 10px 30px;
     margin: 5px;
     border-radius: 8px;
     border: none;
+    max-width: 100px;
 }
 
 .tweets {
     width: 500px;
-    display: flex;
-    justify-content: center;
     border: 2px solid gray;
     border-radius: 10px;
     margin-top: 20px;
     height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.headerTweets {
+    display: flex;
+}
+.avatar{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 5px 15px;
+    border-radius: 50%;
+}
+ .user_name {
+    font-size: 20px;
+    color: #fff;
+}
+.text , .likes  {
+    color: #fff;
+    margin: 10px 15px;
+}
+.likes {
+    border: 1px solid #fff;
+    width: 75px;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
-.headerTweets .avatar {
-    border-radius: 50%;
-    width: 30px;
+.replies  {
+    width: 350px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    margin-top: 20px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.headerReplies {
+    display: flex;
+
+}
+.tweets_id {
+    visibility: hidden;
 }
 /* ------------------------- End About Main ------------------------- */
