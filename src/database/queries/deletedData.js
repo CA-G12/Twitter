@@ -5,7 +5,7 @@ const deletedTweet = (id) => connection.query(
   [id],
 );
 const deletedReply = (id) => connection.query(
-  'DELETE FROM Reply WHERE id = $1',
+  'DELETE FROM Replyes WHERE id = $1',
   [id],
 );
 

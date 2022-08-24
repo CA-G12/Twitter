@@ -1,7 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
-const { deleteTweet, deleteReply, getTweet, getReply } = require('./controller/handler');
+const {
+  deleteTweet, deleteReply, getTweet, getReply,
+} = require('./controller/handler');
 
 router.get('/Tweets', getTweet);
 router.get('/Reply', getReply);

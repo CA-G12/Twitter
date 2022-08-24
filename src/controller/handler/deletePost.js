@@ -1,4 +1,4 @@
-const {deletedTweet, deletedReply} = require('../../database/queries/deletedData');
+const { deletedTweet, deletedReply } = require('../../database/queries/deletedData');
 
 const deleteTweet = (req, res) => {
   // req.body
