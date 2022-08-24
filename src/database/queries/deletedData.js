@@ -1,8 +1,12 @@
 const connection = require('../config/connection');
 
-const deletedData = (id) => connection.query(
+const deletedTweet = (id) => connection.query(
   'DELETE FROM Tweets WHERE id = $1',
   [id],
 );
+const deletedReply = (id) => connection.query(
+  'DELETE FROM Reply WHERE id = $1',
+  [id],
+);
 
-module.exports = deletedData;
+module.exports = { deletedTweet, deletedReply };

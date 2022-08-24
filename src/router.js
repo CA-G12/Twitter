@@ -1,13 +1,11 @@
 const express = require('express');
 
 const router = express.Router();
-const { getTweet, getReply } = require('./controller/handler');
+const { deleteTweet, deleteReply, getTweet, getReply } = require('./controller/handler');
 
 router.get('/Tweets', getTweet);
 router.get('/Reply', getReply);
 
-router.get('/delete' , (req,res) => {
-  
-})
-
+router.get('/deleteTweet', deleteTweet);
+router.get('/deleteReply', deleteReply);
 module.exports = router;
