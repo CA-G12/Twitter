@@ -15,4 +15,8 @@ router.get('/Reply', (req, res) => {
   getReplies(2).then((data) => res.json(data.rows)).catch(() => res.json({ massege: 'Error to get replies', status: '500' }));
 });
 
+router.get('/delete' , (req,res) => {
+  
+})
+
 module.exports = router;
