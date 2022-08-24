@@ -1,0 +1,33 @@
+/* ------------------------- Start About Main ------------------------- */
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.textArea textarea {
+    width: 509px;
+    height: 180px;
+}
+.buttons .btn {
+    padding: 10px 30px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+}
+
+.tweets {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid gray;
+    border-radius: 10px;
+    margin-top: 20px;
+    height: 200px;
+}
+
+.headerTweets .avatar {
+    border-radius: 50%;
+    width: 30px;
+}
+/* ------------------------- End About Main ------------------------- */
