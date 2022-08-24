@@ -1,5 +1,5 @@
 const { faker } = require('@faker-js/faker');
-const { addTweet } = require('../../database/queries');
+const { addTweet , addReply} = require('../../database/queries');
 
 const user = [];
 function createRandomUser() {
@@ -25,4 +25,11 @@ const addPost = (req, res) => {
     user_name: user[0].username, avatar: user[0].avatar, content: data, likes: 0,
   }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'ss', status: '500' }));
 };
-module.exports = addPost;
+const addReplies = (req, res) => {
+  const { data } = req.body;
+  addReply({
+    name: user[0].username, avatar: user[0].avatar, content: 's', tweets_id: 1,
+  }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'ss', status: '500' }));
+}
+
+module.exports = {addPost,addReplies};

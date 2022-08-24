@@ -2,7 +2,6 @@ const textArea = document.getElementById('tweets');
 const submitBtn = document.getElementById('submit');
 const deleteBtn = document.getElementById('delete');
 submitBtn.addEventListener('click', () => {
-  console.log(textArea.value);
   fetchData('POST', {
     data: textArea.value,
   }, '/addTweets').then((data) => console.log('done')).catch((err) => { console.log(err); });

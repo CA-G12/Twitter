@@ -38,20 +38,3 @@ test('get Repleis', (done) => {
       done();
     });
 });
-test('get Repleis', (done) => {
-    supertest(app)
-      .post('/Reply')
-      .send({
-        id: 3,
-        content: 'Software Engineering',
-        avatar: 'https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg',
-        name: 'salsabeel 2',
-        tweets_id: 1,
-      })
-      .end((err, res) => {
-        if (err) { return done(err); }
-        expect(res.body.length).toBe(3);
-        done();
-      });
-  });
-  
