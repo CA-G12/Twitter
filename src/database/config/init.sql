@@ -9,9 +9,9 @@ Create table Tweets (
 );
 Create table Replyes (
     id serial primary key ,
-    content text not null ,
+    name varchar(100) not null,
     avatar  text,  
-    name varchar(100) Default 0,
+    content text  ,
     tweets_id int ,
     foreign key(tweets_id) REFERENCES Tweets(id) on Delete CASCADE 
 );

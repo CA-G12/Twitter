@@ -1,17 +1,17 @@
 const connection = require('../config/connection');
 
 const addTweet = ({
-  userName, avatar, content, likes,
+  user_name, avatar, content, likes,
 }) => connection.query(
-  'INSERT INTO tweets (userName,avatar,content,likes) values($1,$2,$3,$4) returning *',
-  [userName, avatar, content, likes],
+  'INSERT INTO Tweets (user_name,avatar,content,likes) values($1,$2,$3,$4) returning * ',
+  [user_name, avatar, content, likes],
 );
 
 const addReply = ({
-  content, avatar, name, tweetsId,
+  name, avatar, content,tweets_id,
 }) => connection.query(
-  'INSERT INTO replyes (content , avatar , name , tweets_id ) values($1,$2,$3,$4) returning *',
-  [content, avatar, name, tweetsId],
+  'INSERT INTO Replyes (content , avatar , name , tweets_id ) values($1,$2,$3,$4) returning *',
+  [name, avatar, content,tweets_id,],
 );
 
 module.exports = { addTweet, addReply };

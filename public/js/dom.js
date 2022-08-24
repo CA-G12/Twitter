@@ -1,8 +1,17 @@
 const main = document.querySelector('main');
+const textArea = document.getElementById('tweets');
+const submitBtn = document.getElementById('submit');
+const deleteBtn = document.getElementById('delete');
 
+
+fetchData('GET', undefined, '/Tweets')
+  .then((data) => renderTweet(data))
+  .catch((err) => console.log(err));
+  
 fetchData('GET', undefined, '/Reply')
 .then((data) => renderReplyes(data))
 .catch((err) => console.log(err));
+
 
 const renderTweet = (data) => {
   console.log(data);
@@ -77,3 +86,12 @@ const renderReplyes = (data) => {
     main.appendChild(replies);
   });
 };
+
+submitBtn.addEventListener('click', () => {
+  fetchData('POST', {
+    data: textArea.value,
+  }, '/addTweets').then((data) => console.log('done')).catch((err) => { console.log(err); });
+});
+deleteBtn.addEventListener('click', () => {
+  // fetchData('DELETE',textArea.value, '/deleteTweet').then((data) =>console.log('done')).catch(err=>{console.log(err)})
+});
