@@ -1,4 +1,7 @@
 const { getTweets, getReplies } = require('./getData');
-const { postData } = require('./postData');
+const {addTweet , addReply} = require('./postData');
+const  deletedData  = require('./deletedData');
 
-module.exports = { postData, getTweets, getReplies };
+module.exports = {
+  addTweet, getTweets, getReplies, deletedData , addReply
+};

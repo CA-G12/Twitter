@@ -6,4 +6,8 @@ const { getTweet, getReply } = require('./controller/handler');
 router.get('/Tweets', getTweet);
 router.get('/Reply', getReply);
 
+router.get('/delete' , (req,res) => {
+  
+})
+
 module.exports = router;
