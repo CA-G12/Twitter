@@ -1,3 +1,4 @@
+
 const fetchData = (method, data, endpoint) => fetch(endpoint, {
   method,
   body: JSON.stringify(data),
