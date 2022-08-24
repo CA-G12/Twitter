@@ -13,7 +13,7 @@ Create table Replyes (
     avatar  text,  
     name varchar(100) Default 0,
     tweets_id int ,
-    foreign key(tweets_id) REFERENCES Tweets(id)
+    foreign key(tweets_id) REFERENCES Tweets(id) on Delete CASCADE 
 );
 
 INSERT INTO Tweets (user_name,avatar,content,likes) values ('tareq','https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg','Software Engineering',109) ,('salsabeel' ,'https://i.ytimg.com/vi/XjvaJH8aRc0/maxresdefault.jpg' , 'Software Engineering' , 99);
