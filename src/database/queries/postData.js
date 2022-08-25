@@ -8,10 +8,10 @@ const addTweet = ({
 );
 
 const addReply = ({
-  name,avatar,content,tweets_id 
+  name, avatar, content, tweets_id,
 }) => connection.query(
   'INSERT INTO Replyes (name,avatar,content,tweets_id) values($1,$2,$3,$4) returning *',
-  [name,avatar,content,tweets_id ],
+  [name, avatar, content, tweets_id],
 );
 
 module.exports = { addTweet, addReply };
