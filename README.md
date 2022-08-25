@@ -30,7 +30,7 @@ Twiiter is a simple website that you can post and interact with message and repl
 
 ---
 ## sql ER Diagram :
-[ ER Diagram ](./public/assets/ER.jpeg)
+![ ER Diagram ](./public/assets/ER.jpeg)
 ## Technologies ⚙:
 - HTML5
 - CSS3
