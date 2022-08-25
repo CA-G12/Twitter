@@ -1,6 +1,6 @@
 const { join } = require('path');
 
-module.exports = (req, res) => {
- console.log('salsabeel');
-  // res.status(404).sendFile(join(__dirname, '..', '..', '..', 'public', 'errors', '404.html'));
+const clientError = (req, res) => {
+  res.status(404).sendFile(join(__dirname, '..', '..', '..', 'public', 'error', '404.html'));
 };
+module.exports = clientError;

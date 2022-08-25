@@ -10,5 +10,5 @@ router.get('/Reply/:id', getReply);
 router.post('/addTweets', addPost);
 router.post('/addReplay', addReplies);
 router.delete('/deleteTweet', deleteTweet);
-router.get('/deleteReply', deleteReply);
+router.delete('/deleteReply', deleteReply);
 module.exports = router;

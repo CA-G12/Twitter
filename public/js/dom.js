@@ -15,10 +15,14 @@ const renderTweet = (data) => {
     addRep.setAttribute('class', 'addRep');
 
     const likes = document.createElement('button');
-    const likeicon = document.createElement('button');
-    likeicon.setAttribute('class', 'fa-solid fa-heart');
+    likes.setAttribute('class', 'btn');
+    const likeIcon = document.createElement('button');
+    likeIcon.setAttribute('class', 'fa-solid fa-heart');
     likes.textContent = `${ele.likes}`;
-    likes.appendChild(likeicon);
+    likes.appendChild(likeIcon);
+    likes.addEventListener('click',()=>{
+      likeIcon.style.color='#fd4141'
+    })
 
     const reply = document.createElement('button');
     reply.setAttribute('class', 'btn');
@@ -45,6 +49,7 @@ const renderTweet = (data) => {
 
 function addReply(event, tweetId) {
   const tweet = event.target.parentElement.getElementsByClassName('addRep')[0];
+  tweet.textContent = '';
   const addRep = document.createElement('div');
   addRep.setAttribute('class', 'addRep');
   const textAreaDiv = document.createElement('div');
@@ -55,9 +60,13 @@ function addReply(event, tweetId) {
 
   const replySubmit = document.createElement('button');
   replySubmit.textContent = 'Reply';
-  replySubmit.addEventListener('click', () => {
-    addReplies(text.value, tweetId);
-  });
+  if (text.value !== '') {
+    replySubmit.addEventListener('click', () => {
+      addReplies(text.value, tweetId);
+      document.getElementsByClassName('allReply')[0].textContent = '';
+      getReply(event, tweetId);
+    });
+  }
   textAreaDiv.append(text, replySubmit);
   addRep.appendChild(textAreaDiv);
   tweet.appendChild(addRep);
@@ -65,13 +74,27 @@ function addReply(event, tweetId) {
 
 function showReplies(event, data) {
   const tweet = event.target.parentElement.getElementsByClassName('addRep')[0];
+  const allReply = document.createElement('div');
+  allReply.setAttribute('class', 'allReply');
   if (data.length !== 0) {
     data.map((ele) => {
+      const replyContaner = document.createElement('div');
+      replyContaner.setAttribute('class', 'replyContaner');
       const replies = RenderHeadOFTweets(ele.avatar, ele.name, 'tweet-reply');
       const content = contentTweet(ele.content);
-
-      tweet.append(replies, content);
+      const deleteBtn = document.createElement('button');
+      deleteBtn.setAttribute('class', 'btn');
+      deleteBtn.textContent = 'X';
+      deleteBtn.addEventListener('click', () => {
+        deleteReply(ele.id);
+        addReply(event, ele.id);
+        getReply(event, ele.id);
+      });
+      replies.appendChild(deleteBtn);
+      replyContaner.append(replies, content);
+      allReply.append(replyContaner);
     });
+    tweet.appendChild(allReply);
   }
 }
 
@@ -89,6 +112,7 @@ function RenderHeadOFTweets(avatar, userName, classN) {
   replies.append(avatarR, userNameR);
   return replies;
 }
+
 function contentTweet(value) {
   const text = document.createElement('p');
   text.setAttribute('class', 'text');
@@ -98,7 +122,7 @@ function contentTweet(value) {
 
 fetchData('GET', undefined, '/Tweets')
   .then((data) => renderTweet(data))
-  .catch((err) => err.json());
+  .catch((err) => console.log(err));
 
 submitBtn.addEventListener('click', () => {
   fetchData('POST', { data: textArea.value }, '/addTweets')
@@ -112,18 +136,23 @@ submitBtn.addEventListener('click', () => {
 
 function addReplies(content, id) {
   fetchData('POST', { data: content, tweet_id: id }, '/addReplay')
-    .then((res) => res.json())
-    .catch((err) => err.json());
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 }
 function deleteTweet(id) {
   fetchData('DELETE', { data: id }, '/deleteTweet')
     .then((res) => res.json())
-    .catch((err) => err.json());
+    .catch((err) => console.log(err));
 
   window.location.reload();
+}
+function deleteReply(id) {
+  fetchData('DELETE', { data: id }, '/deleteReply')
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 }
 function getReply(event, tweetId) {
   fetchData('GET', undefined, `/Reply/:${tweetId}`)
     .then((data) => showReplies(event, data))
-    .catch((err) => err.json());
+    .catch((err) => console.log(err));
 }
