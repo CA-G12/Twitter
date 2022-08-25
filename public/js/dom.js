@@ -60,13 +60,12 @@ function addReply(event, tweetId) {
 
   const replySubmit = document.createElement('button');
   replySubmit.textContent = 'Reply';
-  if (text.value !== '') {
-    replySubmit.addEventListener('click', () => {
-      addReplies(text.value, tweetId);
-      document.getElementsByClassName('allReply')[0].textContent = '';
-      getReply(event, tweetId);
-    });
-  }
+  replySubmit.addEventListener('click', () => {
+    addReplies(text.value, tweetId);
+    document.getElementsByClassName('allReply')[0].textContent = '';
+    text.value='';
+    getReply(event, tweetId);
+  });
   textAreaDiv.append(text, replySubmit);
   addRep.appendChild(textAreaDiv);
   tweet.appendChild(addRep);
@@ -87,10 +86,9 @@ function showReplies(event, data) {
       deleteBtn.textContent = 'X';
       deleteBtn.addEventListener('click', () => {
         deleteReply(ele.id);
-        addReply(event, ele.id);
         getReply(event, ele.id);
       });
-      replies.appendChild(deleteBtn);
+      replies.appendChild(deleteBtn)
       replyContaner.append(replies, content);
       allReply.append(replyContaner);
     });
@@ -148,7 +146,7 @@ function deleteTweet(id) {
 }
 function deleteReply(id) {
   fetchData('DELETE', { data: id }, '/deleteReply')
-    .then((res) => console.log(res))
+    .then((res) =>console.log(res))
     .catch((err) => console.log(err));
 }
 function getReply(event, tweetId) {
