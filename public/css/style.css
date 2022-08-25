@@ -1,43 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
-    background: #111319;
+    background: rgb(0, 0, 0);
 }
-h1 {
-    color: #fff;
-    margin: 30px 50px;
-}
-/* ------------------------- Start About Main ------------------------- */
-main {
+header{
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    margin:20px;
 }
 
-.textArea textarea {
-    width: 509px;
+header ul{
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    margin-left: -23%;
+}
+
+ul li{
+    margin: 15px;
+    background-color: white;
+    width: 130px;
+    height:35px;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+li:hover{
+    background-color:rgba(121, 228, 255, 0.534);
+    color:white;
+    width: 140px;
+    font-size: 20px;
+}
+h1 {
+    color: rgba(121, 228, 255, 0.534);
+    margin-left: 5%;
+}
+/* ------------------------- Start About Main ------------------------- */
+.main {
+   display: flex;
+   justify-content:space-between;
+   padding-left: 1.5rem;
+   padding-right: 1.5rem;
+   margin: 5%;
+}
+.add{
+    background-color: rgba(121, 228, 255, 0.534);
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    width: 30%;
+    padding: 20px;
+    border-radius: 15px;
+}
+.add h3{
+    color: white;
+    font-size:20px;
+    margin-left: 15px;
+}
+.add textarea {
+    width: 85%;
     height: 180px;
     padding: 15px;
     border-radius: 10px;
+    margin-left: 15px;
+    margin-top:15px;
+    outline: none;
 }
-.btn {
-    display: inline;
-    padding: 10px 30px;
-    margin: 5px;
+.add button {
+    margin-left: 30%;
+    margin-top:40px;
     border-radius: 8px;
     border: none;
     max-width: 100px;
+    height:40px;
+    background-color: black;
+    color: rgba(121, 228, 255, 0.534);
 }
-
+/* Render tweet */
 .tweets {
-    width: 500px;
+    width: 550px;
     border: 2px solid gray;
     border-radius: 10px;
     margin-top: 20px;
-    height: 200px; 
+    height: auto; 
     justify-content: space-between;
+    padding: 20px;
+
 }
 .headerTweets {
     display: flex;
   
+}
+.tweet-reply{
+    display :block;
+}
+.user_name{
+    color: white;
+    margin-top: 15px
 }
 .avatar{
     border-radius: 50%;
@@ -46,10 +109,18 @@ main {
     margin: 5px 15px;
     border-radius: 50%;
 }
-
-.text , .likes  {
-
-    margin: 10px 15px;
+.text{
+    color: white;
+    margin-left: 20%;
+}
+.btn{
+    background-color: rgb(129 201 219 / 45%);
+    width: 100px;
+    height: 35px;
+    border:2px rgba(66, 206, 241, 0.445) solid;
+    margin: 10px;
+    border-radius: 7px;
+    color: white;
 }
 .likes {
     border: 1px solid #fff;
@@ -57,7 +128,35 @@ main {
     padding: 5px 10px;
     border-radius: 10px;
 }
+.addRep{
+    background-color:#81c9db2b;
+    width: 100%;
+    border-radius: 10px;
+    height: auto;
+}
 
+.addRep button{
+    border-radius: 5px;
+    border: none;
+    color: white;
+    border: 2px rgba(66, 206, 241, 0.445) solid;
+    background-color: rgb(129 201 219 / 45%);
+    
+}
+.textAreaForReply{
+   display: flex;
+    justify-content: space-between;
+}
+.textArea{
+    padding-left:10px;
+    padding-top:10px;
+    width: 462px;
+    height: 50px;
+    color: white;
+    background: none;
+    outline: none;
+    border: none;
+}
 .replies  {
     width: 350px;
     border: 2px solid gray;
@@ -68,11 +167,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
 }
-.headerReplies {
-    display: flex;
-    /* position: absolute; */
 
-}
 .tweets_id {
     visibility: hidden;
 }
