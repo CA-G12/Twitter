@@ -62,7 +62,10 @@ function addReply(event, tweetId) {
   replySubmit.textContent = 'Reply';
   replySubmit.addEventListener('click', () => {
     addReplies(text.value, tweetId);
-    document.getElementsByClassName('allReply')[0].textContent = '';
+    const clearDiv = document.getElementsByClassName('allReply')[0];
+    while (clearDiv.firstChild) {
+      clearDiv.removeChild(clearDiv.lastChild);
+    }
     text.value='';
     getReply(event, tweetId);
   });

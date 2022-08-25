@@ -25,7 +25,7 @@ const addPost = (req, res) => {
   }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: 'Error to add Tweet', status: '500' }));
 };
 const addReplies = (req, res) => {
-  const { data ,tweet_id } = req.body; 
+  const { data ,tweet_id } = req.body;
   addReply({
     name: user[0].username, avatar: user[0].avatar, content: data, tweets_id:tweet_id,
   }).then((data) => res.json(data.rows)).catch((err) => res.json({ massage: err, status: '500' }));
